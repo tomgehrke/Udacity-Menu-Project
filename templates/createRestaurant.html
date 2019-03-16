@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Create Restaurant</title>
+    <link type="text/css" rel="stylesheet" media="screen" href="{{url_for('static', filename='bootstrap.min.css')}}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Create New Restaurant</h1>
+        <form action="{{url_for('createRestaurant')}}" method="POST">
+            <fieldset>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input class="form-control form-control-lg" type="text" size="30" name="name">
+                </div>
+            </fieldset>
+            <fieldset class="buttons">
+                <input class="btn btn-primary" type="submit" name="submitButton" value="Create">
+                <input class="btn" type="submit" name="cancelButton" value="Cancel">
+            </fieldset>
+        </form>
+    </div>
+</body>
+
+</html>

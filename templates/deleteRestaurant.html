@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Delete Restaurant</title>
+    <link type="text/css" rel="stylesheet" media="screen" href="{{url_for('static', filename='bootstrap.min.css')}}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="card mx-auto" style="width: 35rem">
+            <div class="card-body">
+                <h5 class="card-title">Are you sure you want to delete "{{restaurant.name}}"?</h1>
+                <form action="{{url_for('deleteRestaurant', restaurant_id = restaurant.id)}}" method="POST">
+                    <fieldset class="buttons">
+                        <input class="btn btn-primary" type="submit" name="submitButton" value="Yes. Delete it.">
+                        <input class="btn" type="submit" name="cancelButton" value="Cancel">
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

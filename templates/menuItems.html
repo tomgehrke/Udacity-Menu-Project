@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{restaurant.name}} Menu</title>
+    <link type="text/css" rel="stylesheet" media="screen" href="{{url_for('static', filename='bootstrap.min.css')}}">
+</head>
+
+<body>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{url_for('listRestaurants')}}">Restaurants</a></li>
+                <li class="breadcrumb-item active">Menu</li>
+            </ol>
+        </nav>
+
+        <a class="btn btn-secondary float-right"
+            href="{{url_for('createMenuItem', restaurant_id = restaurant.id)}}">Create a NEW menu item</a>
+        <h1>{{restaurant.name}}</h1>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <p class="alert alert-success">{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% if menuitems %}
+        <div class="list-group">
+            {% for menuitem in menuitems %}
+            <div class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{menuitem.name}}</h5>
+                    <div>
+                        <a class="btn btn-primary btn-sm"
+                            href="{{url_for('editMenuItem', restaurant_id = restaurant.id, menuitem_id = menuitem.id)}}">Edit</a>
+                        <a class="btn btn-danger btn-sm"
+                            href="{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menuitem_id = menuitem.id)}}">Delete</a>
+                    </div>
+                </div>
+                <p class="price">{{menuitem.price}} </p>
+                <p class="description">{{menuitem.description}}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="alert alert-primary">There are currently no items on this restaurant's menu.</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>

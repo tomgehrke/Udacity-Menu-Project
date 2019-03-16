@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>List of Restaurants</title>
+    <link type="text/css" rel="stylesheet" media="screen" href="{{url_for('static', filename='bootstrap.min.css')}}">
+</head>
+
+<body>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Restaurants</li>
+            </ol>
+        </nav>
+
+        <a class="btn btn-secondary float-right" href="{{url_for('createRestaurant')}}">Add a New Restaurant</a>
+        <h1>Restaurants</h1>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <p class="alert alert-success">{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <div class="list-group">
+            {% for restaurant in restaurants %}
+            <div class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"><a
+                            href="{{url_for('listMenuItems', restaurant_id = restaurant.id)}}">{{restaurant.name}}</a>
+                    </h5>
+                    <div>
+                        <a class="btn btn-primary btn-sm"
+                            href="{{url_for('editRestaurant', restaurant_id = restaurant.id)}}">Edit</a>
+                        <a class="btn btn-danger btn-sm"
+                            href="{{url_for('deleteRestaurant', restaurant_id = restaurant.id)}}">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
